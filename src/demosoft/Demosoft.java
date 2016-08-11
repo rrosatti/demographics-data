@@ -17,6 +17,7 @@ public class Demosoft {
     public static void main(String[] args) {
         System.out.println("Pull Request Test by Rogerio Takashi Hirata");
         System.out.println("Test Repo Permission");
+        System.out.println("Test 2");
     }
     
 }

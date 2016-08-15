@@ -16,33 +16,40 @@ O Projeto Demosoft tem como objetivo exibir informações relevantes relacionada
 Utilizaremos uma API gratuita chamada INQStats - http://blog.inqubu.com/inqstats-open-api-published-to-get-demographic-data
 
 ### Descrição dos dados
-A INQStats API permite que sejam informados os seguintes parametros: 
+O usuário poderá consultar os seguintes tópicos:
 
-- api_key: chave de autenticação
-- data: o tipo de dado à ser pesquisado (Ex: birth_rate, education_expenditure)
-- countries: país ou países selecionados para realizar a pesquisa
-- years: o período selecionado para realizar a pesquisa
+Birth Rate / Taxa de Natalidade </br>
+Corruption Index / Índice de corrupção </br>
+Death Rate / Taxa de Mortalidade </br>
+Education Expenditure / Gastos com Educação </br>
+Forest Area Percent / Porcentagem de Area Florestal </br>
+Happiness Index / Índice de Felicidade </br>
+HDI (Human Development Index) / IDH (Índice de Desenvolvimento Humano) </br>
+Health Expenditure / Gastos com Saúde </br>
+Internetusers Percent / Porcentagem de Usuários com Acesso a Internet </br>
+Life Expectancy / Expectativa de Vida </br>
+Literacy Rate / Taxa de Alfabetismo </br>
+Population / População </br>
+Research Expenditure / Gastos com Pesquisas
 
-Como resultado, os seguintes dados são obtidos:
+Além disso, o usuário poderá escolher entre os seguintes países para realizar tal consulta:
 
-- countryCode: refere-se ao codigo do país (Ex: br)
-- countryName: refere-se ao nome do país (Ex: Brazil)
-- {data}: refere-se ao tipo de dado passado como parametro (Ex: population)
-  - year: ano referente ao dado pesquisado
-  - data: valor referente ao ano especificado
+Brazil, Chile, USA, Canada, Portugal, Norway(Noruega), South Africa(África do Sul), Angola, China, Japan(Japão), Australia and New Zealand(Nova Zelândia)
 
 ### Volume de dados
-O volume de dados irá variar de acordo com os parametros passados no momento da pesquisa.
+O volume de dados irá variar de acordo com os parametros passados no momento da consulta. Mas, o volume total de dados é de aproximadamente 100KB.
 
 ### Formato de disponibilização dos dados
 Os dados são disponibilizados em formato JSON.
 
 ### Exemplo de consulta
-http://&#8203;inqstatsapi.inqubu.com?api_key=ADDYOURKEYHERE&data=population&countries=us,gb
+Países: USA, Brazil
+Tópico: Population / População
 
-[{"countryCode":"us","countryName":"USA","population":[{"year":"2014","data":"318857056"},{"year":"2013","data":"316128839"},{"year":"2012","data":"313914040"},{"year":"2011","data":"311587816"},{"year":"2010","data":"309326225"}]},{"countryCode":"gb","countryName":"United Kingdom","population":[{"year":"2014","data":"64510376"},{"year":"2013","data":"64097085"},{"year":"2012","data":"63227526"},{"year":"2011","data":"62752472"},{"year":"2010","data":"62271177"}]}]
+[{"countryCode":"us","countryName":"USA","population":[{"year":"2014","data":"318857056"},{"year":"2013","data":"316128839"},{"year":"2012","data":"313914040"},{"year":"2011","data":"311587816"},{"year":"2010","data":"309326225"}]}]
+[{"countryCode":"br","countryName":"Brazil","population":[{"year":"2014","data":"206077898"},{"year":"2013","data":"204259377"},{"year":"2012","data":"202401584"},{"year":"2011","data":"200517584"},{"year":"2010","data":"198614208"}]}]
 
 O gráfico abaixo é um exemplo de como os dados poderão ser exibidos:
 
-![inqstats_chart](https://cloud.githubusercontent.com/assets/16086636/17643135/d468c302-6136-11e6-8090-1130fe451e4f.png)
+![inqstats_chart_2](https://cloud.githubusercontent.com/assets/16086636/17671680/aa672d14-62ee-11e6-9156-741f700d077d.png)
 

@@ -19,7 +19,9 @@ public class Info {
     private int endYear;
     private HashMap<Integer,String> results;
     
-   
+   public Info(){
+    //Constructor    
+    }
 }
    
     

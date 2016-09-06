@@ -54,13 +54,12 @@ O gráfico abaixo é um exemplo de como os dados poderão ser exibidos:
 ![inqstats_chart_2](https://cloud.githubusercontent.com/assets/16086636/17671680/aa672d14-62ee-11e6-9156-741f700d077d.png)
 
 ### Protótipos
-Tela com gráfico gerado
 ![tela com grafico gerado](https://cloud.githubusercontent.com/assets/7906573/18284837/ff8de99a-7441-11e6-85a2-5763acd09058.png)
 
-Tela com menu aberto
+
 ![tela com menu aberto](https://cloud.githubusercontent.com/assets/7906573/18284851/10d60d40-7442-11e6-8909-208002cdf507.png)
 
-Tela com comparação entre os países
+
 ![tela com comparacao entre paises](https://cloud.githubusercontent.com/assets/7906573/18284859/1636b870-7442-11e6-8457-be9b33162827.png)
 
 

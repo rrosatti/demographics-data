@@ -26,7 +26,7 @@ public class Info {
        this.topic = topic;
        this.startYear =  startYear;
        this.endYear =  endYear;
-       this.results = results;
+       this.results = results; //hashmap
     }
    
    public void setCountryCode(String countryCode){

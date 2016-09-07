@@ -19,56 +19,63 @@ public class Info {
     private int endYear;
     private HashMap<Integer,String> results;
     
-   public Info(){
-    //Constructor    
+    //Constructor
+   public Info(String countryCode, String countryName, String topic, int startYear, int endYear, HashMap<Integer,String> results){
+       this.countryCode = countryCode;
+       this.countryName = countryName;
+       this.topic = topic;
+       this.startYear =  startYear;
+       this.endYear =  endYear;
+       this.results = results;
     }
    
-   public String setCountryCode(){
-       return null; //code here 
+   public void setCountryCode(String countryCode){
+       this.countryCode = countryCode;
    }
    
-   public String setCountryName(){
-       return null; //code here
+   public void setCountryName(String countryName){
+       this.countryName = countryName;
    }
    
-   public String setTopic(){
-       return null; //code here
+   public void setTopic(String topic){
+       this.topic = topic;
    }
    
-   public int setStartYear(){
-       return 0; //code here
+   public void setStartYear(int startYear){
+      this.startYear = startYear;
    }
    
-   public int setEndYear(){
-       return 0; //code here
+   public void setEndYear(int endYear){
+       this.endYear = endYear;
    }
    
-   public HashMap<Integer,String> setResults(){
-       return null; //code here
+   //set results
+   public void addData(int year, String data){
+       this.results.put(year, data);
    }
    
    public String getCountryCode(){
-       return countryCode; //code here 
+       return countryCode; 
    }
    
    public String getCountryName(){
-       return countryName; //code here
+       return countryName; 
    }
    
    public String getTopic(){
-       return topic; //code here
+       return topic; 
    }
    
    public int getStartYear(){
-       return startYear; //code here
+       return startYear; 
    }
    
    public int getEndYear(){
-       return endYear; //code here
+       return endYear; 
    }
    
-   public HashMap<Integer,String> getResults(){
-       return null; //code here
+   public String getResult(int year){
+       return results.get(year);
    }
 }
    

@@ -5,6 +5,8 @@
  */
 package demosoft;
 
+import org.json.simple.JSONArray;
+
 /**
  *
  * @author rodri
@@ -12,8 +14,7 @@ package demosoft;
 public class Demosoft {
     
     private Info info;
-    private JsonRemoteFetch remoteFetch;
-    
+    //private JsonRemoteFetch remoteFetch;    
     
     public void showGraph() {
         // code here
@@ -39,9 +40,11 @@ public class Demosoft {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Pull Request Test by Rogerio Takashi Hirata");
-        System.out.println("Test Repo Permission");
-        System.out.println("Test 2");
+        /** Testing getJson() method 
+        JSONArray json = new JSONArray();
+        JsonRemoteFetch remoteFetch  = new JsonRemoteFetch();
+        json = remoteFetch.getJson("population", "br", 1980, 2016);
+        System.out.println(json.toString()); */
     }
     
 }

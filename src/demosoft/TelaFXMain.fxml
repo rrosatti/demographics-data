@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ComboBox id="cmb_pais" fx:id="cmb_pais" layoutX="14.0" layoutY="348.0" prefHeight="31.0" prefWidth="108.0" promptText="Pais" />
+      <ComboBox layoutX="131.0" layoutY="348.0" prefHeight="31.0" prefWidth="108.0" promptText="Topico" />
+      <DatePicker layoutX="251.0" layoutY="348.0" prefHeight="31.0" prefWidth="88.0" promptText="Inicio" />
+      <DatePicker layoutX="350.0" layoutY="348.0" prefHeight="31.0" prefWidth="88.0" promptText="Fim" />
+      <Button layoutX="447.0" layoutY="348.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" text="Gerar" />
+      <Button layoutX="543.0" layoutY="348.0" mnemonicParsing="false" text="Comparar" />
+      <BarChart layoutX="14.0" layoutY="22.0" prefHeight="320.0" prefWidth="467.0" title="Informação do pais xxx">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</Pane>

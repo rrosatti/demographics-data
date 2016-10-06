@@ -23,10 +23,11 @@ public class TelaFXMain extends Application {
     
     @Override
     public void start(final Stage stage) throws Exception{
-        Parent parent = FXMLLoader.load(getClass().getResource("TelaFXMain.fxml"));
+                Parent parent = FXMLLoader.load(getClass().getResource("TelaFXMain.fxml"));
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
 		stage.show();
+                
     }
 
     /**

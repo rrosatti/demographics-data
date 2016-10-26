@@ -5,7 +5,18 @@
  */
 package demosoft;
 
+
 import java.util.Iterator;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,7 +26,7 @@ import org.json.simple.parser.JSONParser;
  * @author rodri
  */
 public class Demosoft {
-    
+
     private Info info;
     private JSONObject json;
     private JsonRemoteFetch remoteFetch;
@@ -45,23 +56,36 @@ public class Demosoft {
     public void showGraph() {
         // code here
     }
-    
+
     public void readFile() {
         // code here
     }
-    
+
     public void exportToPDF() {
-        // code here
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\Luis\\Desktop\\PDFTest.pdf"));
+            document.open();
+            document.add(new Paragraph("textoaqui")); //using string
+            /*Image image = Image.getInstance("caminho"); using image
+            document.add(image)
+            */
+        } catch (DocumentException de) {
+            System.out.println(de.getMessage());
+        } catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+        }
+        document.close();
     }
-    
+
     public void newData() {
         // code here
     }
-    
+
     public void compare() {
         // code here
     }
-    
+
     public void getData() {
         Thread t = new Thread(getRemoteFetch());
         
@@ -102,8 +126,6 @@ public class Demosoft {
             }
             System.out.println("Everything's fine!");
         }
-            
-                    
         
     }
     
@@ -111,6 +133,7 @@ public class Demosoft {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         /** Testing getJson() method */
         Demosoft demo = new Demosoft();
         Demosoft demo2 = new Demosoft();
@@ -124,6 +147,18 @@ public class Demosoft {
         demo3.getData();
         demo2.getData();
         
+        /**
+         * Testing getJson() method JSONArray json = new JSONArray();
+         * JsonRemoteFetch remoteFetch = new JsonRemoteFetch(); json =
+         * remoteFetch.getJson("population", "br", 1980, 2016);
+         * System.out.println(json.toString());
+         */
+        
+        /*
+        * Testing exportToPDF method        
+        * Demosoft demo = new Demosoft();
+        * demo.exportToPDF();
+        */
     }
-    
+
 }

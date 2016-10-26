@@ -19,14 +19,18 @@ public class Info {
     private int endYear;
     private HashMap<Integer,String> results;
     
+    public Info() {
+       this.results = new HashMap<>();
+    }
+    
     //Constructor
-   public Info(String countryCode, String countryName, String topic, int startYear, int endYear, HashMap<Integer,String> results){
+   public Info(String countryCode, String countryName, String topic, int startYear, int endYear){
        this.countryCode = countryCode;
        this.countryName = countryName;
        this.topic = topic;
        this.startYear =  startYear;
        this.endYear =  endYear;
-       this.results = new HashMap(); //hashmap
+       this.results = new HashMap<>();
     }
    
    public void setCountryCode(String countryCode){

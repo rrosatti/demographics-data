@@ -6,22 +6,39 @@
 package demosoft;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 /**
  *
  * @author Luis
  */
-public class JsonRemoteFetch {
+public class JsonRemoteFetch implements Runnable {
     public static final String KEY = "11521db3f9e377bf";
     public static final String SEARCH_URL = "http://inqstatsapi.inqubu.com/?api_key=" + KEY;
     
+    private String topic;
+    private String countryCode;
+    private int startYear;
+    private int endYear;
+    private JSONObject result;
+    
     public JsonRemoteFetch() { }
     
-    public JSONArray getJson(String topic,String countryCode,int startYear,int endYear) {
+    public void setProperties(String topic, String countryCode, int startYear, int endYear) {
+        this.topic = topic;
+        this.countryCode = countryCode;
+        this.startYear = startYear;
+        this.endYear = endYear;
+    }
+    
+    private JSONObject getData() {
         String stringURL = SEARCH_URL;
         stringURL += "&data=" + topic + "&countries=" + countryCode + "&years=" + startYear + ":" + endYear;
         
@@ -38,14 +55,20 @@ public class JsonRemoteFetch {
             }
             reader.close();
             
-            JSONArray data = new JSONArray();
-            data.add(json.toString());
+            JSONParser parser = new JSONParser();
             
-            if (data == null) {
+            json.deleteCharAt(0); // remove the first [
+            json.deleteCharAt(json.length()-2); // remove the last ]
+            
+            Object obj = parser.parse(json.toString());
+            result = (JSONObject) obj;
+            
+            
+            if (result == null) {
                 return null;
             }
             
-            return data;
+            return result;
             
             
         } catch (Exception e) {
@@ -53,6 +76,14 @@ public class JsonRemoteFetch {
             return null;
         }
                 
+    }
+    
+    public void run() {
+        getData();
+    }
+    
+    public JSONObject getJson() {
+        return result;
     }
     
     

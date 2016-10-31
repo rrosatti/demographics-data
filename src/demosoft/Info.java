@@ -81,6 +81,10 @@ public class Info {
    public String getResult(int year){
        return results.get(year);
    }
+   
+   public HashMap<Integer, String> getAllData() {
+       return results;
+   }
 }
    
     

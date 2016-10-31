@@ -15,6 +15,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
@@ -99,7 +100,7 @@ public class Demosoft {
         createInfoObject();
     }
     
-    public void createInfoObject() {
+    private void createInfoObject() {
         JSONArray jsonArray = new JSONArray();
 
         json = remoteFetch.getJson();
@@ -127,6 +128,14 @@ public class Demosoft {
             System.out.println("Everything's fine!");
         }
         
+    }
+    
+    public HashMap<Integer, String> getAllData() {
+        return info.getAllData();
+    }
+    
+    public String getData(int year) {
+        return info.getResult(year);
     }
     
     /**

@@ -5,15 +5,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="646.0" fx:controller="demosoft.FXMLController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="demosoft.FXMLController">
    <children>
       <ComboBox id="cmb_pais" fx:id="cmb_pais" layoutX="14.0" layoutY="348.0" prefHeight="31.0" prefWidth="108.0" promptText="Pais" />
-      <ComboBox id="cmb_topics" layoutX="131.0" layoutY="348.0" prefHeight="31.0" prefWidth="108.0" promptText="Topico" />
-      <DatePicker layoutX="251.0" layoutY="348.0" prefHeight="31.0" prefWidth="88.0" promptText="Inicio" />
-      <DatePicker layoutX="350.0" layoutY="348.0" prefHeight="31.0" prefWidth="88.0" promptText="Fim" />
-      <Button id="bt_getData" layoutX="447.0" layoutY="348.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" text="Gerar" />
-      <Button layoutX="543.0" layoutY="348.0" mnemonicParsing="false" text="Comparar" />
+      <ComboBox id="cmb_topics" fx:id="cmb_topics" layoutX="131.0" layoutY="348.0" prefHeight="31.0" prefWidth="108.0" promptText="Topico" />
+      <Button id="bt_getData" layoutX="468.0" layoutY="348.0" mnemonicParsing="false" onAction="#gerarButtonAction" prefHeight="31.0" prefWidth="88.0" text="Gerar" />
+      <Button layoutX="563.0" layoutY="354.0" mnemonicParsing="false" text="Comparar" />
       <BarChart layoutX="14.0" layoutY="22.0" prefHeight="320.0" prefWidth="467.0" title="Informação do pais xxx">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
@@ -22,5 +19,7 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </BarChart>
+      <ComboBox fx:id="cmb_start_year" layoutX="248.0" layoutY="348.0" prefHeight="31.0" prefWidth="95.0" promptText="Inicio" />
+      <ComboBox fx:id="cmb_end_year" layoutX="349.0" layoutY="348.0" prefHeight="31.0" prefWidth="95.0" promptText="Fim" />
    </children>
 </Pane>

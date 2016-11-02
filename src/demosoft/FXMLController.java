@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -26,9 +27,13 @@ public class FXMLController implements Initializable {
 
     @FXML
     ComboBox cmb_pais;
+    @FXML
     ComboBox cmb_topics;
-    ComboBox cmb_start_year; // we need to create it
-    ComboBox cmb_end_year; // we need to create it
+    @FXML
+    ComboBox cmb_start_year; 
+    @FXML
+    ComboBox cmb_end_year;
+    @FXML
     Button bt_getData;
     
     private Demosoft demo1;
@@ -39,16 +44,50 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        List<String> list = new ArrayList<>();
-        list.add("Brasil");
-        list.add("Estados Unidos");
-        list.add("Japão");
-        ObservableList obList = FXCollections.observableList(list);
+        
+        //initialize cmb_country
+        List<KeyValuePair> cmbCountryList = new ArrayList<>();
+        cmbCountryList.add(new KeyValuePair("br","Brasil"));
+        cmbCountryList.add(new KeyValuePair("us","Estados Unidos"));
+        cmbCountryList.add(new KeyValuePair("ca","Canada"));
+        
+        ObservableList obCoutry_list = FXCollections.observableList(cmbCountryList);
         cmb_pais.getItems().clear();
-        cmb_pais.setItems(obList);
+        cmb_pais.setItems(obCoutry_list);
+
+        
+        //initialize cmb_topics
+        List<String> cmbTopicsList = new ArrayList<>();
+        cmbTopicsList.add(new String("population"));
+        cmbTopicsList.add(new String("something else"));
+        cmbTopicsList.add(new String("something else"));
+        
+        ObservableList obTopics_list = FXCollections.observableList(cmbTopicsList);
+        cmb_topics.getItems().clear();
+        cmb_topics.setItems(obTopics_list);
+        
+        //initialize cmb_start_year
+        List<String> cmbStartYearList = new ArrayList<>();
+        cmbStartYearList.add(new String("2000"));
+        cmbStartYearList.add(new String("2001"));
+        cmbStartYearList.add(new String("2002"));
+        
+        ObservableList obStartYear_list = FXCollections.observableList(cmbStartYearList);
+        cmb_start_year.getItems().clear();
+        cmb_start_year.setItems(obStartYear_list);
+        
+        //initialize cmb_end_year
+        List<String> cmbEndYear = new ArrayList<>();
+        cmbEndYear.add(new String("2016"));
+
+        
+        ObservableList obEndYear_list = FXCollections.observableList(cmbEndYear);
+        cmb_end_year.getItems().clear();
+        cmb_end_year.setItems(obEndYear_list);
         
         /** This is just a test. I don't know if it will work like that */
         // btGetData onClick() event
+        /*
         {
             // These values will be caught through the interface objects
             String countryCode = "";
@@ -63,7 +102,37 @@ public class FXMLController implements Initializable {
             data1 = new HashMap<>();
             data1 = demo1.getAllData();
         }
-        
-    }    
+        */
+    }
+    
+
+    @FXML
+     private void gerarButtonAction(ActionEvent event) {
+         System.out.println("Botao clicado");
+         
+          // These values will be caught through the interface objects
+          
+            //Get the object that contains the value for the selected key
+            //Ex. Brasil -> br     
+            KeyValuePair countryCodeObject =(KeyValuePair) cmb_pais.getSelectionModel().getSelectedItem();
+            String countryCode = countryCodeObject.getKey();
+                    
+            String topic = cmb_topics.getSelectionModel().getSelectedItem().toString();
+            
+            System.out.println("selecionados->"+countryCode+" "+topic);
+            
+            //get selected years
+            int startYear = Integer.parseInt(cmb_start_year.getSelectionModel().getSelectedItem().toString());;
+            int endYear = Integer.parseInt(cmb_end_year.getSelectionModel().getSelectedItem().toString());
+            
+            
+            //Process the selected information
+            demo1 = new Demosoft();
+            demo1.setProperties(topic, countryCode, startYear, endYear);
+            demo1.getData();
+            
+            data1 = new HashMap<>();
+            data1 = demo1.getAllData();
+     }    
     
 }

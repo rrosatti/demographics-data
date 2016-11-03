@@ -1,0 +1,1 @@
+birth_rate;corruption_index;death_rate;education_expenditure;forest_area_percent;happiness_index;hdi;health_expenditure;internetusers_percent;life_expectancy;population;research_expenditure

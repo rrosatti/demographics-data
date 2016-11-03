@@ -5,10 +5,15 @@
  */
 package demosoft.ApplicationLogic;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,10 +45,15 @@ public class FXMLController implements Initializable {
     private Demosoft demo2; // it will be used to get the data for the second country (compare)
     private HashMap<Integer, String> data1;
     private HashMap<Integer, String> data2; // // it will be used to store the data from the second country (compare)
+    private List<String> topics = new ArrayList<>(); // it will contain all the avaiable topics
+    private LinkedHashMap<String, String> countries = new LinkedHashMap<>(); // it will contain all the countries and their code(br, us, ca)
+    private List<Integer> years = new ArrayList<>(); // it will contain all the avaiable years
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        // Testing 
+        getYearsFile();
         
         //initialize cmb_country
         List<KeyValuePair> cmbCountryList = new ArrayList<>();
@@ -133,6 +143,58 @@ public class FXMLController implements Initializable {
             
             data1 = new HashMap<>();
             data1 = demo1.getAllData();
-     }    
+     }
+     
+     private void getCountriesFile() {
+         File dir = new File(new File("").getAbsolutePath() +"/data/");
+         try {
+             FileReader fr = new FileReader(new File(dir, "countries.txt"));
+             BufferedReader br = new BufferedReader(fr);
+             String line = br.readLine();
+             while (line != null) {
+                 String[] countryCode = line.split(",");
+                 countries.put(countryCode[1], countryCode[0]);
+                 line = br.readLine();
+             }
+             br.close();
+         } catch (Exception e) {
+            e.printStackTrace();
+         }
+         
+     }
+     
+     private void getTopicsFile() {
+         File dir = new File(new File("").getAbsolutePath() +"/data/");
+         try {
+             FileReader fr = new FileReader(new File(dir, "topics.txt"));
+             BufferedReader br = new BufferedReader(fr);
+             String line = br.readLine();
+             String[] topicsFile = line.split(";");
+             for (int i=0; i<topicsFile.length; i++) {
+                 topics.add(topicsFile[i]);
+             }
+             br.close();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+         
+     }
+     
+     private void getYearsFile() {
+         File dir = new File(new File("").getAbsolutePath() + "/data/");
+         try {
+             FileReader fr = new FileReader(new File(dir, "years.txt"));
+             BufferedReader br = new BufferedReader(fr);
+             String line = br.readLine();
+             String[] yearsFile = line.split(";");
+             for (int i=0; i<yearsFile.length; i++){
+                 years.add(Integer.parseInt(yearsFile[i]));
+             }
+             br.close();
+         } catch(Exception e) {
+             e.printStackTrace();
+         }
+         
+     }
     
 }

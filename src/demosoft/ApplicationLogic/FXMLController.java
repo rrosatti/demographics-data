@@ -77,18 +77,20 @@ public class FXMLController implements Initializable {
         cmb_topics.setItems(obTopics_list);
         
         //initialize cmb_start_year
-        List<String> cmbStartYearList = new ArrayList<>();
-        cmbStartYearList.add(new String("2000"));
-        cmbStartYearList.add(new String("2001"));
-        cmbStartYearList.add(new String("2002"));
+        List<Integer> cmbStartYearList = new ArrayList<>();
+        for(int i = 1980 ; i < 2015; i++){
+           cmbStartYearList.add(i); 
+        }
         
         ObservableList obStartYear_list = FXCollections.observableList(cmbStartYearList);
         cmb_start_year.getItems().clear();
         cmb_start_year.setItems(obStartYear_list);
         
         //initialize cmb_end_year
-        List<String> cmbEndYear = new ArrayList<>();
-        cmbEndYear.add(new String("2016"));
+        List<Integer> cmbEndYear = new ArrayList<>();
+        for(int i = 1980 ; i < 2015; i++){
+           cmbEndYear.add(i); 
+        }
 
         
         ObservableList obEndYear_list = FXCollections.observableList(cmbEndYear);

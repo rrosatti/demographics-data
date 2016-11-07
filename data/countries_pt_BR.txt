@@ -1,0 +1,249 @@
+﻿Afeganistão, AF
+Ilhas Åland, AX
+Albânia, AL
+Argélia, DZ
+Samoa Americana, AS
+Andorra, AD
+Angola, AO
+Anguilla, AI
+Antarctica, AQ
+Antígua e Barbuda, AG
+Argentina, AR
+Armênia, AM
+Aruba, AW
+Austrália, AU
+Áustria, AT
+Azerbaijão, AZ
+Bahamas, BS
+Bahrein, BH
+Bangladesh, BD
+Barbados, BB
+Belarus, BY
+Bélgica, BE
+Belize, BZ
+Benin, BJ
+Bermuda, BM
+Butão, BT
+Bolívia, BO
+Bonaire, BQ
+Bósnia e Herzegovina, BA
+Botswana, BW
+Bouvet Island, BV
+Brasil, BR
+Território Britânico do Oceano Índico, IO
+Brunei Darussalam, BN
+Bulgária, BG
+Burkina Faso, BF
+Burundi, BI
+Camboja, KH
+Camarões, CM
+Canadá, CA
+Cabo Verde, CV
+Ilhas Cayman, KY
+República Centro-Africana, CF
+Chade, TD
+Chile, CL
+China, CN
+Ilha do Natal, CX
+Ilhas Cocos (Keeling), CC
+Colômbia, CO
+Comores, KM
+Congo, CG
+Congo, CD
+Ilhas Cook, CK
+Costa Rica, CR
+Côte d'Ivoire, CI
+Croácia, HR
+Cuba, CU
+Curaçao, CW
+Chipre, CY
+República Checa, CZ
+Dinamarca, DK
+Djibuti, DJ
+Dominica, DM
+República Dominicana, DO
+Equador, CE
+Egito, EG
+El Salvador, SV
+Guiné Equatorial, GQ
+Eritreia, ER
+Estónia, EE
+Etiópia, ET
+Ilhas Falkland (Malvinas), FK
+Faroe Islands, FO
+Fiji, FJ
+Finlândia, FI
+França, FR
+Guiana Francesa, GF
+Polinésia Francesa, PF
+Territórios Franceses do Sul, TF
+Gabão, GA
+Gâmbia, GM
+Geórgia, GE
+Alemanha, DE
+Gana, GH
+Gibraltar, GI
+Grécia, GR
+Groenlândia, GL
+Grenada, GD
+Guadalupe, GP
+Guam, GU
+Guatemala, GT
+Guernsey, GG
+Guiné, GN
+Guiné-Bissau, GW
+Guiana, GY
+Haiti, HT
+Ilha de Heard e ilhas de McDonald, HM
+Santa Sé (Estado da Cidade do Vaticano), VA
+Honduras, HN
+Hong Kong, HK
+Hungria, HU
+Islândia, IS
+Índia, IN
+Indonésia, ID
+Irã, IR
+Iraque, QI
+Irlanda, IE
+Ilha de Man, IM
+Israel, IL
+Itália, IT
+Jamaica, JM
+Japão, JP
+Jersey, JE
+Jordan, JO
+Cazaquistão, KZ
+Kenya, KE
+Kiribati, KI
+Coréia do Norte, KP
+Coréia do Sul, KR
+Kuwait, KW
+Quirguistão, KG
+República Democrática Popular do Laos, LA
+Letónia, LV
+Líbano, LB
+Lesoto, LS
+Libéria, LR
+Líbia, LY
+Liechtenstein, LI
+Lituânia, LT
+Luxemburgo, LU
+Macau, MO
+Macedônia, MK
+Madagascar, MG
+Malawi, MW
+Malásia, MY
+Maldivas, MV
+Mali, ML
+Malta, MT
+Ilhas Marshall, MH
+Martinica, MQ
+Mauritânia, MR
+Maurícia, MU
+Mayotte, YT
+México, MX
+Micronésia, FM
+Moldávia
+Monaco, MC
+Mongólia, MN
+Montenegro, ME
+Montserrat, MS
+Marrocos, MA
+Moçambique, MZ
+Myanmar, MM
+Namíbia, NA
+Nauru, NR
+Nepal, NP
+Holanda, NL
+Nova Caledônia, NC
+Nova Zelândia, Nova Zelândia
+Nicarágua, NI
+Níger, NE
+Nigéria, NG
+Niue, NU
+Ilha de Norfolk, NF
+Ilhas Marianas do Norte, MP
+Noruega, NO
+Omã, OM
+Paquistão, PK
+Palau, PW
+Palestina, PS
+Panamá, PA
+Papua-Nova Guiné, PG
+Paraguai, PY
+Peru, PE
+Filipinas, PH
+Pitcairn, PN
+Polônia, PL
+Portugal, PT
+Porto Rico, PR
+Qatar, QA
+Réunion, RE
+Roménia, RO
+Federação Russa, RU
+Ruanda, RW
+Saint Barthélemy, BL
+Santa Helena, SH
+Saint Kitts e Nevis, KN
+Santa Lúcia, LC
+São Martinho (parte francesa), MF
+São Pedro e Miquelon, PM
+São Vicente e Granadinas, VC
+Samoa, WS
+San Marino, SM
+São Tomé e Príncipe, ST
+Arábia Saudita, SA
+Senegal, SN
+Sérvia, RS
+Seychelles, SC
+Serra Leoa, SL
+Singapura, SG
+Sint Maarten (parte holandesa), SX
+Eslováquia, SK
+Eslovénia, SI
+Solomon Islands, SB
+Somália, SO
+África do Sul, ZA
+Geórgia do Sul e Ilhas Sandwich do Sul, GS
+Sul do Sudão, SS
+Espanha, ES
+Sri Lanka, LK
+Sudão, SD
+Suriname, SR
+Svalbard e Jan Mayen, SJ
+Suazilândia, SZ
+Suécia, SE
+Suíça, CH
+República Árabe Síria, SY
+Taiwan, TW
+Tajiquistão, TJ
+Tanzânia, TZ
+Tailândia, TH
+Timor-Leste, TL
+Togo, TG
+Tokelau, TK
+Tonga, TO
+Trinidad e Tobago, TT
+Tunísia, TN
+Turquia, TR
+Turcomenistão, TM
+Ilhas Turcas e Caicos, TC
+Tuvalu, TV
+Uganda, UG
+Ucrânia, UA
+Emirados Árabes Unidos, AE
+Reino Unido, GB
+Estados Unidos, EUA
+Ilhas Menores Distantes dos Estados Unidos, UM
+Uruguai, UY
+Uzbequistão, UZ
+Vanuatu, VU
+Venezuela, VE
+Vietnã, VN
+Ilhas Virgens, VG
+Ilhas Virgens dos EUA, VI
+Wallis e Futuna, WF
+Sahara Ocidental, EH
+Yemen, YE
+Zâmbia, ZM
+Zimbábue, ZW

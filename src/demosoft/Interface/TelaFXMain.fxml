@@ -8,15 +8,15 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="demosoft.ApplicationLogic.FXMLController">
    <children>
       <ComboBox id="cmb_pais" fx:id="cmb_pais" layoutX="14.0" layoutY="348.0" prefHeight="31.0" prefWidth="108.0" promptText="Pais" />
-      <ComboBox id="cmb_topics" fx:id="cmb_topics" layoutX="131.0" layoutY="348.0" prefHeight="31.0" prefWidth="108.0" promptText="Topico" />
+      <ComboBox id="cmb_topics" fx:id="cmb_topics" layoutX="140.0" layoutY="348.0" prefHeight="31.0" prefWidth="108.0" promptText="Topico" />
       <Button id="bt_getData" layoutX="468.0" layoutY="348.0" mnemonicParsing="false" onAction="#gerarButtonAction" prefHeight="31.0" prefWidth="88.0" text="Gerar" />
-      <Button layoutX="563.0" layoutY="354.0" mnemonicParsing="false" text="Comparar" />
-      <BarChart id="barchart" fx:id="barchart" layoutX="14.0" layoutY="22.0" prefHeight="320.0" prefWidth="467.0" title="Demosoft">
+      <Button layoutX="563.0" layoutY="354.0" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancelar" />
+      <BarChart id="barchart" fx:id="barchart" layoutX="14.0" layoutY="22.0" prefHeight="320.0" prefWidth="617.0" title="Demosoft">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis side="BOTTOM" fx:id="xAxis" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis fx:id="yAxis" minorTickCount="0" side="LEFT" />
         </yAxis>
       </BarChart>
       <ComboBox fx:id="cmb_start_year" layoutX="248.0" layoutY="348.0" prefHeight="31.0" prefWidth="95.0" promptText="Inicio" />

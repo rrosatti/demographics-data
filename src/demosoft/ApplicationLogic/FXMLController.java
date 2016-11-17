@@ -21,6 +21,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
@@ -144,10 +146,18 @@ public class FXMLController implements Initializable {
             //Process the selected information
             demo1 = new Demosoft();
             demo1.setProperties(topic, countryCode, startYear, endYear);
-            demo1.getData();
+            if (demo1.getData() == 1) {
+                data1 = new HashMap<>();
+                data1 = demo1.getAllData();
+            } else {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Error Message");
+                alert.setHeaderText("Sorry, Demosoft couldn't show the data!");
+                alert.setContentText("Try choosing another country or topic.");
+                alert.showAndWait();
+            }
             
-            data1 = new HashMap<>();
-            data1 = demo1.getAllData();
+            
             
      }
      

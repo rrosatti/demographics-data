@@ -111,7 +111,7 @@ public class Demosoft {
         // code here
     }
 
-    public void getData() {
+    public int getData() {
         Thread t = new Thread(getRemoteFetch());
 
         try {
@@ -121,10 +121,10 @@ public class Demosoft {
             e.printStackTrace();
         }
 
-        createInfoObject();
+        return createInfoObject();
     }
 
-    private void createInfoObject() {
+    private int createInfoObject() {
         JSONArray jsonArray = new JSONArray();
 
         json = remoteFetch.getJson();
@@ -150,6 +150,10 @@ public class Demosoft {
                 info.addData(year, data);
             }
             System.out.println("Everything's fine!");
+            return 1;
+        } else {
+            System.out.println("Couldn't get the data!");
+            return 0;
         }
 
     }

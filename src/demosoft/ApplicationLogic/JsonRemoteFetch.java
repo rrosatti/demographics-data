@@ -61,7 +61,14 @@ public class JsonRemoteFetch implements Runnable {
             json.deleteCharAt(json.length()-2); // remove the last ]
             
             // Use a try catch here??
-            Object obj = parser.parse(json.toString());
+            //System.out.println(json.toString());
+            Object obj;
+            try {
+                obj = parser.parse(json.toString());
+            } catch (Exception e) {
+                return null;
+            }
+            
             result = (JSONObject) obj;
             
             

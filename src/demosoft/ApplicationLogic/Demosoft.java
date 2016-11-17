@@ -132,6 +132,7 @@ public class Demosoft {
         if (json != null) {
             info.setCountryName((String) json.get("countryName"));
             jsonArray = (JSONArray) json.get(info.getTopic());
+            if (jsonArray.isEmpty()) return 0;
             //Iterator<JSONObject> iterator = jsonArray.iterator();
             for (int i = 0; i < jsonArray.size(); i++) {
 

@@ -71,7 +71,6 @@ public class JsonRemoteFetch implements Runnable {
             
             result = (JSONObject) obj;
             
-            
             if (result == null) {
                 return null;
             }

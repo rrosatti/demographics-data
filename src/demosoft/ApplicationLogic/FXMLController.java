@@ -15,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -147,9 +148,6 @@ public class FXMLController implements Initializable {
         int startYear = Integer.parseInt(cmb_start_year.getSelectionModel().getSelectedItem().toString());
         int endYear = Integer.parseInt(cmb_end_year.getSelectionModel().getSelectedItem().toString());
 
-        // change barchart title
-        barchart.setTitle(topicObject.getValue() + " - " + countryObject.getValue() + " (From " + startYear + " to " + endYear + ")");
-
         //Process the selected information
         demo1 = new Demosoft();
         demo1.setProperties(topic, countryCode, startYear, endYear);
@@ -162,15 +160,31 @@ public class FXMLController implements Initializable {
             alert.setHeaderText("Sorry, Demosoft couldn't show the data!");
             alert.setContentText("Try choosing another country or topic.");
             alert.showAndWait();
+            return;
         }
+        
+        // change barchart title
+        Set<Integer> setYears = data1.keySet();
+        List<Integer> years = new ArrayList<>();
+        years.addAll(setYears);
+        barchart.setTitle(topicObject.getValue() + " - " + countryObject.getValue() + 
+                " (From " + years.get(0) + " to " + years.get(years.size() - 1) + ")");
 
         //show graph and compare        
         xAxis.setLabel("Year");
         yAxis.setLabel("Value");
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(countryCode);
-        String data;
+        //String data;
         try {
+            for (Integer key: data1.keySet()) {
+                if (data1.get(key).contains(".")) {
+                    series1.getData().add(new XYChart.Data(Integer.toString(key), Double.parseDouble(data1.get(key))));
+                } else {
+                    series1.getData().add(new XYChart.Data(Integer.toString(key), Integer.parseInt(data1.get(key))));
+                }
+            }
+            /**
             for (int ano = startYear; ano <= endYear; ++ano) {
                 data = demo1.getData(ano);
                 if (data.contains(".")) {
@@ -178,7 +192,7 @@ public class FXMLController implements Initializable {
                 } else {
                     series1.getData().add(new XYChart.Data(Integer.toString(ano), Integer.parseInt(demo1.getData(ano))));
                 }
-            }
+            }*/
             barchart.getData().add(series1);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);

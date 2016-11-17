@@ -1,0 +1,12 @@
+birth_rate,Birth Rate
+corruption_index,Corruption Index
+death_rate,Death Rate
+education_expenditure,Education Expenditure
+forest_area_percent,Forest Area Percent
+happiness_index,Happiness Index
+hdi,HDI
+health_expenditure,Health Expenditure
+internetusers_percent,Internet Users Percent
+life_expectancy,Life Expectancy
+population,Population
+research_expenditure,Research Expenditure

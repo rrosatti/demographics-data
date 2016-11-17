@@ -18,6 +18,10 @@ public class KeyValuePair {
    }
 
   public String getKey()   {    return key;    }
+  
+  public String getValue() {
+      return value;
+  }
 
   public String toString() {    return value;  }
 }

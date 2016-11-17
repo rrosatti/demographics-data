@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -58,26 +61,24 @@ public class Demosoft {
         return remoteFetch;
     }
 
-    public BarChart<String, Number> showGraph() {
-        String pais;
-        final CategoryAxis xvalues = new CategoryAxis();
+    public void showGraph(int startYear, int endYear) throws IOException {
+        
+        final NumberAxis xvalues = new NumberAxis();
         final NumberAxis yvalues = new NumberAxis();
-        final BarChart<String, Number> graphbar = new BarChart<>(xvalues, yvalues);
+        final BarChart<Number, Number> graphbar = new BarChart<>(xvalues, yvalues);
         graphbar.setTitle("Dados Demográficos");
         xvalues.setLabel("Year");
         yvalues.setLabel("Value");
 
         XYChart.Series barra = new XYChart.Series();
         barra.setName(info.getTopic());
-        HashMap<Integer, String> data = info.getAllData();
-        for (int key : data.keySet()) {
-            System.out.println("key: " + key + " data: " + data.get(key));
-            barra.getData().add(new XYChart.Data(key, data.get(key)));
+        
+        for (int ano = startYear ; ano < endYear ; ++ano) {
+            barra.getData().add(new XYChart.Data(ano, Integer.parseInt(info.getResult(ano))));
         }
         
         graphbar.getData().addAll(barra);//teoricamente aqui formaria o gráfico, agora precisa alimentar o componente de barchart.
         
-        return graphbar;
         
     }
 

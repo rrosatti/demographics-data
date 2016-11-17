@@ -48,21 +48,22 @@ public class FXMLController implements Initializable {
     private Demosoft demo2; // it will be used to get the data for the second country (compare)
     private HashMap<Integer, String> data1;
     private HashMap<Integer, String> data2; // // it will be used to store the data from the second country (compare)
-    private List<String> topics = new ArrayList<>(); // it will contain all the avaiable topics
+    private LinkedHashMap<String, String> topics = new LinkedHashMap<>(); // it will contain all the avaiable topics
     private LinkedHashMap<String, String> countries = new LinkedHashMap<>(); // it will contain all the countries and their code(br, us, ca)
     private List<Integer> years = new ArrayList<>(); // it will contain all the avaiable years
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        // Testing 
         getYearsFile();
+        getCountriesFile();
+        getTopicsFile();
         
         //initialize cmb_country
         List<KeyValuePair> cmbCountryList = new ArrayList<>();
-        cmbCountryList.add(new KeyValuePair("br","Brasil"));
-        cmbCountryList.add(new KeyValuePair("us","Estados Unidos"));
-        cmbCountryList.add(new KeyValuePair("ca","Canada"));
+        for (String key: countries.keySet()) {
+            cmbCountryList.add(new KeyValuePair(key, countries.get(key)));
+        }
         
         ObservableList obCoutry_list = FXCollections.observableList(cmbCountryList);
         cmb_pais.getItems().clear();
@@ -70,31 +71,27 @@ public class FXMLController implements Initializable {
 
         
         //initialize cmb_topics
-        List<String> cmbTopicsList = new ArrayList<>();
-        cmbTopicsList.add(new String("population"));
-        cmbTopicsList.add(new String("something else"));
-        cmbTopicsList.add(new String("something else"));
+        List<KeyValuePair> cmbTopicsList = new ArrayList<>();
+        for (String key : topics.keySet()) {
+            cmbTopicsList.add(new KeyValuePair(key, topics.get(key)));
+        }
         
         ObservableList obTopics_list = FXCollections.observableList(cmbTopicsList);
         cmb_topics.getItems().clear();
         cmb_topics.setItems(obTopics_list);
         
-        //initialize cmb_start_year
-        List<Integer> cmbStartYearList = new ArrayList<>();
-        for(int i = 1980 ; i < 2015; i++){
-           cmbStartYearList.add(i); 
+        //initialize cmb_start_year and cmb_end_year
+        // I changed here to maintain the pattern
+        List<Integer> cmbStartYear = new ArrayList<>();
+        List<Integer> cmbEndYear = new ArrayList<>();
+        for (Integer year: years) {
+            cmbStartYear.add(year);
+            cmbEndYear.add(year); 
         }
         
-        ObservableList obStartYear_list = FXCollections.observableList(cmbStartYearList);
+        ObservableList obStartYear_list = FXCollections.observableList(cmbStartYear);
         cmb_start_year.getItems().clear();
         cmb_start_year.setItems(obStartYear_list);
-        
-        //initialize cmb_end_year
-        List<Integer> cmbEndYear = new ArrayList<>();
-        for(int i = 1980 ; i < 2015; i++){
-           cmbEndYear.add(i); 
-        }
-
         
         ObservableList obEndYear_list = FXCollections.observableList(cmbEndYear);
         cmb_end_year.getItems().clear();
@@ -129,17 +126,20 @@ public class FXMLController implements Initializable {
           
             //Get the object that contains the value for the selected key
             //Ex. Brasil -> br     
-            KeyValuePair countryCodeObject =(KeyValuePair) cmb_pais.getSelectionModel().getSelectedItem();
-            String countryCode = countryCodeObject.getKey();
-                    
-            String topic = cmb_topics.getSelectionModel().getSelectedItem().toString();
+            KeyValuePair countryObject =(KeyValuePair) cmb_pais.getSelectionModel().getSelectedItem();
+            String countryCode = countryObject.getKey();
+            
+            KeyValuePair topicObject = (KeyValuePair) cmb_topics.getSelectionModel().getSelectedItem();
+            String topic = topicObject.getKey();
             
             System.out.println("selecionados->"+countryCode+" "+topic);
             
             //get selected years
-            int startYear = Integer.parseInt(cmb_start_year.getSelectionModel().getSelectedItem().toString());;
+            int startYear = Integer.parseInt(cmb_start_year.getSelectionModel().getSelectedItem().toString());
             int endYear = Integer.parseInt(cmb_end_year.getSelectionModel().getSelectedItem().toString());
             
+            // change barchart title
+            barchart.setTitle(topicObject.getValue() + " - " + countryObject.getValue() + " (From " + startYear + " to " + endYear + ")");
             
             //Process the selected information
             demo1 = new Demosoft();
@@ -149,18 +149,17 @@ public class FXMLController implements Initializable {
             data1 = new HashMap<>();
             data1 = demo1.getAllData();
             
-            barchart = demo1.showGraph();
      }
      
      private void getCountriesFile() {
          File dir = new File(new File("").getAbsolutePath() +"/data/");
          try {
-             FileReader fr = new FileReader(new File(dir, "countries.txt"));
+             FileReader fr = new FileReader(new File(dir, "countries_en_US.txt"));
              BufferedReader br = new BufferedReader(fr);
              String line = br.readLine();
              while (line != null) {
                  String[] countryCode = line.split(",");
-                 countries.put(countryCode[1], countryCode[0]);
+                 countries.put(countryCode[1].toLowerCase(), countryCode[0]);
                  line = br.readLine();
              }
              br.close();
@@ -173,12 +172,13 @@ public class FXMLController implements Initializable {
      private void getTopicsFile() {
          File dir = new File(new File("").getAbsolutePath() +"/data/");
          try {
-             FileReader fr = new FileReader(new File(dir, "topics.txt"));
+             FileReader fr = new FileReader(new File(dir, "topics_en_US.txt"));
              BufferedReader br = new BufferedReader(fr);
              String line = br.readLine();
-             String[] topicsFile = line.split(";");
-             for (int i=0; i<topicsFile.length; i++) {
-                 topics.add(topicsFile[i]);
+             while (line != null) {
+                 String[] topic = line.split(",");
+                 topics.put(topic[0], topic[1]);
+                 line = br.readLine();
              }
              br.close();
          } catch (Exception e) {

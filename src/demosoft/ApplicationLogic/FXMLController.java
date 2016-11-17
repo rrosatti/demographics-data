@@ -20,6 +20,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
@@ -40,6 +41,8 @@ public class FXMLController implements Initializable {
     ComboBox cmb_end_year;
     @FXML
     Button bt_getData;
+    @FXML
+    BarChart barchart;
     
     private Demosoft demo1;
     private Demosoft demo2; // it will be used to get the data for the second country (compare)
@@ -145,6 +148,8 @@ public class FXMLController implements Initializable {
             
             data1 = new HashMap<>();
             data1 = demo1.getAllData();
+            
+            barchart = demo1.showGraph();
      }
      
      private void getCountriesFile() {

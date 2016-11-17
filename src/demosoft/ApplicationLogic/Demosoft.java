@@ -58,7 +58,7 @@ public class Demosoft {
         return remoteFetch;
     }
 
-    public void showGraph() {
+    public BarChart<String, Number> showGraph() {
         String pais;
         final CategoryAxis xvalues = new CategoryAxis();
         final NumberAxis yvalues = new NumberAxis();
@@ -71,12 +71,13 @@ public class Demosoft {
         barra.setName(info.getTopic());
         HashMap<Integer, String> data = info.getAllData();
         for (int key : data.keySet()) {
+            System.out.println("key: " + key + " data: " + data.get(key));
             barra.getData().add(new XYChart.Data(key, data.get(key)));
         }
         
         graphbar.getData().addAll(barra);//teoricamente aqui formaria o gráfico, agora precisa alimentar o componente de barchart.
         
-        
+        return graphbar;
         
     }
 

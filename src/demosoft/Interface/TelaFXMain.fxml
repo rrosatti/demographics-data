@@ -11,7 +11,7 @@
       <ComboBox id="cmb_topics" fx:id="cmb_topics" layoutX="131.0" layoutY="348.0" prefHeight="31.0" prefWidth="108.0" promptText="Topico" />
       <Button id="bt_getData" layoutX="468.0" layoutY="348.0" mnemonicParsing="false" onAction="#gerarButtonAction" prefHeight="31.0" prefWidth="88.0" text="Gerar" />
       <Button layoutX="563.0" layoutY="354.0" mnemonicParsing="false" text="Comparar" />
-      <BarChart layoutX="14.0" layoutY="22.0" prefHeight="320.0" prefWidth="467.0" title="Informação do pais xxx">
+      <BarChart id="barchart" fx:id="barchart" layoutX="14.0" layoutY="22.0" prefHeight="320.0" prefWidth="467.0" title="Informação do pais xxx">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>

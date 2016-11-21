@@ -5,7 +5,11 @@
  */
 package demosoft.ApplicationLogic;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -84,6 +88,14 @@ public class Info {
    
    public HashMap<Integer, String> getAllData() {
        return results;
+   }
+   
+   public List<Integer> getYears() {
+       List<Integer> result = new ArrayList<>();
+       Set<Integer> setRes = results.keySet();
+       result.addAll(setRes);
+       Collections.sort(result);
+       return result;
    }
 }
    

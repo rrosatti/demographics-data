@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -183,9 +184,11 @@ public class FXMLController implements Initializable {
                 }
 
                 // change barchart title
-                Set<Integer> setYears = data1.keySet();
+                /**Set<Integer> setYears = data1.keySet();
                 List<Integer> years = new ArrayList<>();
                 years.addAll(setYears);
+                Collections.sort(years);*/
+                List<Integer> years = demo1.getYears();
                 barchart.setTitle(topicObject.getValue() + " - " + countryObject.getValue()
                         + " (From " + years.get(0) + " to " + years.get(years.size() - 1) + ")");
 

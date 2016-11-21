@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
@@ -165,6 +166,10 @@ public class Demosoft {
 
     public String getData(int year) {
         return info.getResult(year);
+    }
+    
+    public List<Integer> getYears() {
+        return info.getYears();
     }
 
     /**

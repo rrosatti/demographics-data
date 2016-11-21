@@ -29,6 +29,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SingleSelectionModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,7 +38,7 @@ import javax.swing.JOptionPane;
  * @author rogerio
  */
 public class FXMLController implements Initializable {
-
+    
     @FXML
     ComboBox cmb_pais;
     @FXML
@@ -54,7 +55,7 @@ public class FXMLController implements Initializable {
     CategoryAxis xAxis;
     @FXML
     NumberAxis yAxis;
-
+    
     private Demosoft demo1;
     private Demosoft demo2; // it will be used to get the data for the second country (compare)
     private HashMap<Integer, String> data1;
@@ -65,7 +66,7 @@ public class FXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         getYearsFile();
         getCountriesFile();
         getTopicsFile();
@@ -75,7 +76,7 @@ public class FXMLController implements Initializable {
         for (String key : countries.keySet()) {
             cmbCountryList.add(new KeyValuePair(key, countries.get(key)));
         }
-
+        
         ObservableList obCoutry_list = FXCollections.observableList(cmbCountryList);
         cmb_pais.getItems().clear();
         cmb_pais.setItems(obCoutry_list);
@@ -85,7 +86,7 @@ public class FXMLController implements Initializable {
         for (String key : topics.keySet()) {
             cmbTopicsList.add(new KeyValuePair(key, topics.get(key)));
         }
-
+        
         ObservableList obTopics_list = FXCollections.observableList(cmbTopicsList);
         cmb_topics.getItems().clear();
         cmb_topics.setItems(obTopics_list);
@@ -98,11 +99,11 @@ public class FXMLController implements Initializable {
             cmbStartYear.add(year);
             cmbEndYear.add(year);
         }
-
+        
         ObservableList obStartYear_list = FXCollections.observableList(cmbStartYear);
         cmb_start_year.getItems().clear();
         cmb_start_year.setItems(obStartYear_list);
-
+        
         ObservableList obEndYear_list = FXCollections.observableList(cmbEndYear);
         cmb_end_year.getItems().clear();
         cmb_end_year.setItems(obEndYear_list);
@@ -128,90 +129,102 @@ public class FXMLController implements Initializable {
         }
          */
     }
-
+    
     @FXML
     private void gerarButtonAction(ActionEvent event) {
-        System.out.println("Botao clicado");
-
-        // These values will be caught through the interface objects
-        //Get the object that contains the value for the selected key
-        //Ex. Brasil -> br     
-        KeyValuePair countryObject = (KeyValuePair) cmb_pais.getSelectionModel().getSelectedItem();
-        String countryCode = countryObject.getKey();
-
-        KeyValuePair topicObject = (KeyValuePair) cmb_topics.getSelectionModel().getSelectedItem();
-        String topic = topicObject.getKey();
-
-        System.out.println("selecionados->" + countryCode + " " + topic);
-
-        //get selected years
-        int startYear = Integer.parseInt(cmb_start_year.getSelectionModel().getSelectedItem().toString());
-        int endYear = Integer.parseInt(cmb_end_year.getSelectionModel().getSelectedItem().toString());
-
-        //Process the selected information
-        demo1 = new Demosoft();
-        demo1.setProperties(topic, countryCode, startYear, endYear);
-        if (demo1.getData() == 1) {
-            data1 = new HashMap<>();
-            data1 = demo1.getAllData();
-        } else {
-            Alert alert = new Alert(AlertType.INFORMATION);
+        
+        if (cmb_pais.getSelectionModel().getSelectedIndex() == -1 || cmb_topics.getSelectionModel().getSelectedIndex() == -1 || cmb_start_year.getSelectionModel().getSelectedIndex() == -1 || cmb_end_year.getSelectionModel().getSelectedIndex() == -1) {
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error Message");
-            alert.setHeaderText("Sorry, Demosoft couldn't show the data!");
-            alert.setContentText("Try choosing another country or topic.");
+            alert.setHeaderText("Sorry, Demosoft couldn't proceed!");
+            alert.setContentText("Please, Complete all fields");
             alert.showAndWait();
             return;
-        }
-        
-        // change barchart title
-        Set<Integer> setYears = data1.keySet();
-        List<Integer> years = new ArrayList<>();
-        years.addAll(setYears);
-        barchart.setTitle(topicObject.getValue() + " - " + countryObject.getValue() + 
-                " (From " + years.get(0) + " to " + years.get(years.size() - 1) + ")");
+        } else {
+            // These values will be caught through the interface objects
+            //Get the object that contains the value for the selected key
+            //Ex. Brasil -> br     
+            KeyValuePair countryObject = (KeyValuePair) cmb_pais.getSelectionModel().getSelectedItem();
+            String countryCode = countryObject.getKey();
+            
+            KeyValuePair topicObject = (KeyValuePair) cmb_topics.getSelectionModel().getSelectedItem();
+            String topic = topicObject.getKey();
+            
+            System.out.println("selecionados->" + countryCode + " " + topic);
 
-        //show graph and compare        
-        xAxis.setLabel("Year");
-        yAxis.setLabel("Value");
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName(countryCode);
-        //String data;
-        try {
-            for (Integer key: data1.keySet()) {
-                if (data1.get(key).contains(".")) {
-                    series1.getData().add(new XYChart.Data(Integer.toString(key), Double.parseDouble(data1.get(key))));
+            //get selected years
+            int startYear = Integer.parseInt(cmb_start_year.getSelectionModel().getSelectedItem().toString());
+            int endYear = Integer.parseInt(cmb_end_year.getSelectionModel().getSelectedItem().toString());
+            
+            if (startYear > endYear) {
+                resetComboBox();
+                
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText("Sorry, Demosoft couldn't proceed!");
+                alert.setContentText("The start date cannot be greater or equals than end date");
+                alert.showAndWait();
+                return;
+            } else {
+
+                //Process the selected information
+                demo1 = new Demosoft();
+                demo1.setProperties(topic, countryCode, startYear, endYear);
+                if (demo1.getData() == 1) {
+                    data1 = new HashMap<>();
+                    data1 = demo1.getAllData();
                 } else {
-                    series1.getData().add(new XYChart.Data(Integer.toString(key), Integer.parseInt(data1.get(key))));
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText("Sorry, Demosoft couldn't show the data!");
+                    alert.setContentText("Try choosing another country or topic.");
+                    alert.showAndWait();
+                    return;
                 }
+
+                // change barchart title
+                Set<Integer> setYears = data1.keySet();
+                List<Integer> years = new ArrayList<>();
+                years.addAll(setYears);
+                barchart.setTitle(topicObject.getValue() + " - " + countryObject.getValue()
+                        + " (From " + years.get(0) + " to " + years.get(years.size() - 1) + ")");
+
+                //show graph and compare        
+                xAxis.setLabel("Year");
+                yAxis.setLabel("Value");
+                XYChart.Series series1 = new XYChart.Series();
+                series1.setName(countryObject.getValue());
+                String data;
+                try {
+                    for (int ano = startYear; ano <= endYear; ++ano) {
+                        data = demo1.getData(ano);
+                        if (data.contains(".")) {
+                            series1.getData().add(new XYChart.Data(Integer.toString(ano), Double.parseDouble(demo1.getData(ano))));
+                        } else {
+                            series1.getData().add(new XYChart.Data(Integer.toString(ano), Integer.parseInt(demo1.getData(ano))));
+                        }
+                    }
+                    barchart.getData().add(series1);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+                
+                cmb_topics.setDisable(true);
+                cmb_start_year.setDisable(true);
+                cmb_end_year.setDisable(true);
             }
-            /**
-            for (int ano = startYear; ano <= endYear; ++ano) {
-                data = demo1.getData(ano);
-                if (data.contains(".")) {
-                    series1.getData().add(new XYChart.Data(Integer.toString(ano), Double.parseDouble(demo1.getData(ano))));
-                } else {
-                    series1.getData().add(new XYChart.Data(Integer.toString(ano), Integer.parseInt(demo1.getData(ano))));
-                }
-            }*/
-            barchart.getData().add(series1);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
         }
-        
-        cmb_topics.setEditable(false);
-        cmb_start_year.setEditable(false);
-        cmb_end_year.setEditable(false);
-        
-
     }
     
-    public void cancelButtonAction(ActionEvent event){
-        cmb_topics.setEditable(true);
-        cmb_start_year.setEditable(true);
-        cmb_end_year.setEditable(true);
-        barchart.getData().add(null);
+    public void cancelButtonAction(ActionEvent event) {
+        resetComboBox();
+        cmb_topics.setDisable(false);
+        cmb_start_year.setDisable(false);
+        cmb_end_year.setDisable(false);
+        barchart.getData().clear();
+        barchart.setTitle("Demosoft");
     }
-
+    
     private void getCountriesFile() {
         File dir = new File(new File("").getAbsolutePath() + "/data/");
         try {
@@ -227,9 +240,9 @@ public class FXMLController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     private void getTopicsFile() {
         File dir = new File(new File("").getAbsolutePath() + "/data/");
         try {
@@ -245,9 +258,9 @@ public class FXMLController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     private void getYearsFile() {
         File dir = new File(new File("").getAbsolutePath() + "/data/");
         try {
@@ -262,7 +275,14 @@ public class FXMLController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
+    private void resetComboBox() {
+        cmb_pais.getSelectionModel().clearAndSelect(-1);
+        cmb_topics.getSelectionModel().clearAndSelect(-1);
+        cmb_start_year.getSelectionModel().clearAndSelect(-1);
+        cmb_end_year.getSelectionModel().clearAndSelect(-1);        
+    }
+    
 }

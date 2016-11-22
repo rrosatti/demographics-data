@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -64,7 +65,9 @@ public class FXMLController implements Initializable {
     private LinkedHashMap<String, String> topics = new LinkedHashMap<>(); // it will contain all the avaiable topics
     private LinkedHashMap<String, String> countries = new LinkedHashMap<>(); // it will contain all the countries and their code(br, us, ca)
     private List<Integer> years = new ArrayList<>(); // it will contain all the avaiable years
-
+    
+    ResourceBundle texts;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -134,11 +137,13 @@ public class FXMLController implements Initializable {
     @FXML
     private void gerarButtonAction(ActionEvent event) {
         
+        texts = ResourceBundle.getBundle("Resources.ui", Locale.getDefault());
+        
         if (cmb_pais.getSelectionModel().getSelectedIndex() == -1 || cmb_topics.getSelectionModel().getSelectedIndex() == -1 || cmb_start_year.getSelectionModel().getSelectedIndex() == -1 || cmb_end_year.getSelectionModel().getSelectedIndex() == -1) {
             Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setHeaderText("Sorry, Demosoft couldn't proceed!");
-            alert.setContentText("Please, Complete all fields");
+            alert.setTitle(texts.getString("ErTitle"));//ErTitle
+            alert.setHeaderText(texts.getString("ErNotProceed"));//ErNotProceed
+            alert.setContentText(texts.getString("ErFields"));//ErFields
             alert.showAndWait();
             return;
         } else {
@@ -161,9 +166,9 @@ public class FXMLController implements Initializable {
                 resetComboBox();
                 
                 Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText("Sorry, Demosoft couldn't proceed!");
-                alert.setContentText("The start date cannot be greater or equals than end date");
+                alert.setTitle(texts.getString("ErTitle"));//ErTitle
+                alert.setHeaderText(texts.getString("ErNotProceed"));//ErNotProceed
+                alert.setContentText(texts.getString("ErDate"));//ErDate
                 alert.showAndWait();
                 return;
             } else {
@@ -176,9 +181,9 @@ public class FXMLController implements Initializable {
                     data1 = demo1.getAllData();
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText("Sorry, Demosoft couldn't show the data!");
-                    alert.setContentText("Try choosing another country or topic.");
+                    alert.setTitle(texts.getString("ErTitle"));//ErTitle
+                    alert.setHeaderText(texts.getString("ErShowData"));//ErShowData
+                    alert.setContentText(texts.getString("ErAnotherCountry"));//ErAnotherCountry
                     alert.showAndWait();
                     return;
                 }
@@ -193,8 +198,8 @@ public class FXMLController implements Initializable {
                         + " (From " + years.get(0) + " to " + years.get(years.size() - 1) + ")");
 
                 //show graph and compare        
-                xAxis.setLabel("Year");
-                yAxis.setLabel("Value");
+                xAxis.setLabel(texts.getString("Year"));//Year
+                yAxis.setLabel(texts.getString("Value"));//Value
                 XYChart.Series series1 = new XYChart.Series();
                 series1.setName(countryObject.getValue());
                 String data;

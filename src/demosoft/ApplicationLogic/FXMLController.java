@@ -64,6 +64,8 @@ public class FXMLController implements Initializable {
     private LinkedHashMap<String, String> topics = new LinkedHashMap<>(); // it will contain all the avaiable topics
     private LinkedHashMap<String, String> countries = new LinkedHashMap<>(); // it will contain all the countries and their code(br, us, ca)
     private List<Integer> years = new ArrayList<>(); // it will contain all the avaiable years
+    private int qtyCountries = 0; // it represents the number of countries that are actually showing in the screen
+    private int qtyYears = 0; // it represents the amount of selected years (range) 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -130,7 +132,7 @@ public class FXMLController implements Initializable {
         }
          */
     }
-    
+                
     @FXML
     private void gerarButtonAction(ActionEvent event) {
         
@@ -189,9 +191,13 @@ public class FXMLController implements Initializable {
                 years.addAll(setYears);
                 Collections.sort(years);*/
                 List<Integer> years = demo1.getYears();
+                int sYear = years.get(0);
+                int eYear = years.get(years.size() - 1);
                 barchart.setTitle(topicObject.getValue() + " - " + countryObject.getValue()
-                        + " (From " + years.get(0) + " to " + years.get(years.size() - 1) + ")");
+                        + " (From " + sYear + " to " + eYear + ")");
 
+                qtyYears = eYear - sYear;
+                
                 //show graph and compare        
                 xAxis.setLabel("Year");
                 yAxis.setLabel("Value");
@@ -199,7 +205,7 @@ public class FXMLController implements Initializable {
                 series1.setName(countryObject.getValue());
                 String data;
                 try {
-                    for (int ano = startYear; ano <= endYear; ++ano) {
+                    for (int ano = sYear; ano <= eYear; ++ano) {
                         data = demo1.getData(ano);
                         if (data.contains(".")) {
                             series1.getData().add(new XYChart.Data(Integer.toString(ano), Double.parseDouble(demo1.getData(ano))));
@@ -212,6 +218,9 @@ public class FXMLController implements Initializable {
                     JOptionPane.showMessageDialog(null, e);
                 }
                 
+                qtyCountries++;
+                checkNumberOfCountries();
+                
                 cmb_topics.setDisable(true);
                 cmb_start_year.setDisable(true);
                 cmb_end_year.setDisable(true);
@@ -219,13 +228,16 @@ public class FXMLController implements Initializable {
         }
     }
     
-    public void cancelButtonAction(ActionEvent event) {
+    public void resetButtonAction(ActionEvent event) {
         resetComboBox();
         cmb_topics.setDisable(false);
         cmb_start_year.setDisable(false);
         cmb_end_year.setDisable(false);
         barchart.getData().clear();
         barchart.setTitle("Demosoft");
+        cmb_pais.setDisable(false);
+        qtyCountries = 0;
+        qtyYears = 0;
     }
     
     private void getCountriesFile() {
@@ -286,6 +298,26 @@ public class FXMLController implements Initializable {
         cmb_topics.getSelectionModel().clearAndSelect(-1);
         cmb_start_year.getSelectionModel().clearAndSelect(-1);
         cmb_end_year.getSelectionModel().clearAndSelect(-1);        
+    }
+    
+    /**
+     * qtyYears > 15 = only 2 countries will be shown
+     * qtyYears > 9 && qtyYears < 15 = only 4 countries will be shown
+     * qtyYears < 9 = only 6 countries will be shown
+     * 
+     */
+    private void checkNumberOfCountries() {
+        
+        if (qtyYears < 9 && qtyCountries == 6) {
+            cmb_pais.setDisable(true);
+            resetComboBox();
+        } else if (qtyYears < 15 && qtyYears > 9 && qtyCountries == 4) {
+            cmb_pais.setDisable(true);
+            resetComboBox();
+        } else if (qtyYears > 15 && qtyCountries == 2){
+            cmb_pais.setDisable(true);
+            resetComboBox();
+        }
     }
     
 }
